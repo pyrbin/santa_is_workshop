@@ -16,13 +16,11 @@ func _ready():
 	set_random_toy();
 	
 func bad_present():
-	#audio_utils.play_audio(game.kid_spawner.asp, audio)
-	pass;
+	audio_utils.play_audio(game.kid_spawner.asp, game.sfx["kid_angry"])
 	
 func good_present():
-	#audio_utils.play_audio(game.kid_spawner.asp, audio)
-	pass;	
-	
+	audio_utils.play_audio(game.kid_spawner.asp, game.sfx["kid_happy"])
+
 func set_shader_color(r:float, g: float, b:float, a:float = 1):
 	sprite.material.set_shader_param("outLineColor", Color(r,g,b,a))
 	
@@ -57,5 +55,6 @@ func logic(d: float):
 		velocity = Vector2.ZERO;
 		game.set_hp(game.hp-1);
 		game.kid_spawner.kill_kid(self);
+		game.player.attacked(self);
 	else:
 		velocity = direction * speed * d;

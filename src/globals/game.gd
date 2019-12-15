@@ -5,7 +5,27 @@ const TOY_SUFFIX = ".png"
 const ENEMY_SCORE = 10;
 
 const sfx = {
-	"oof": preload("res://assets/audio/oof.wav")
+	"button": preload("res://assets/audio/button.wav"),
+	"cycle": preload("res://assets/audio/cycle_bag.wav"),
+	"open_bag": preload("res://assets/audio/open_bag.wav"),
+	"completed_build": preload("res://assets/audio/completed_build.wav"),
+	"scrap": preload("res://assets/audio/scrap.wav"),
+	"select_part": preload("res://assets/audio/select_part.wav"),
+	"throwing": preload("res://assets/audio/throwing.wav"),
+	"walking1": preload("res://assets/audio/walking1.wav"),
+	"walking2": preload("res://assets/audio/walking2.wav"),
+	"score": preload("res://assets/audio/score.wav"),
+	"game_over": preload("res://assets/audio/game_over.wav"),
+	
+	# santa
+	"hurt": preload("res://assets/audio/hurt.wav"),
+	"hoho": preload("res://assets/audio/hoho.wav"),
+	"hoho_2": preload("res://assets/audio/hoho_2.wav"),
+	"good_boy": preload("res://assets/audio/good_boy.wav"),
+
+	#kid
+	"kid_happy": preload("res://assets/audio/kid_happy.wav"),
+	"kid_angry": preload("res://assets/audio/kid_angry.wav"),
 }
 
 # Toy settings:
@@ -42,18 +62,18 @@ const prop_toys: Array = [
 
 # Difficulty settings:
 var level_threshold = {
-	50: 2,
-	100: 3,
-	200: 4,
-	300: 5,
+	40: 2,
+	70: 3,
+	150: 4,
+	230: 5,
 }
 
 var kid_speed_data = {
 	1: 10,
-	2: 12,
-	3: 14,
-	4: 16,
-	5: 18
+	2: 13,
+	3: 15,
+	4: 18,
+	5: 20
 }
 
 var build_speed_data = {
@@ -121,6 +141,7 @@ func spawn_speed() -> float:
 func set_score(val: int):
 	score = val;
 	hud.score.sync_score();
+	audio_utils.play_audio(root_asp, sfx["score"]);
 	# audio_utils.play_audio(root_asp, score);
 	if (level_threshold.has(score) && level_threshold[score] != level):
 		upgrade_level();
@@ -130,11 +151,11 @@ func upgrade_level():
 	kid_spawner.upgrade = true;
 	hud.builder.upgrade = true;
 	
+	
 func set_hp(val: int):
 	hp = val;
-	print("ookej");
 	hud.hp.sync_hp();
-	audio_utils.play_audio(root_asp, sfx["oof"]);
+	audio_utils.play_audio(root_asp, sfx["hurt"]);
 	shake_camera(0.5, 50, 5);
 	if (hp <= 0):
 		on_death();
@@ -146,9 +167,13 @@ func on_death():
 func create_toy(id: String = base_toys[randi()%base_toys.size()]) -> Toy:
 	return toy_scenes[id].instance() as Toy;
 
+var builder_open = false;
+
 func show_build_hud(value: bool):
+	builder_open = value;
 	if value:
 		hud.builder.show();
+		audio_utils.play_audio(hud.asp, sfx["open_bag"]);
 		#hud.get_node("SelectRect").show();
 		#hud.bag.show();
 	else: 

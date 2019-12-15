@@ -12,7 +12,7 @@ func _set_z(value: float):
 	z = value;
 	
 onready var sprite = $Graphics/Pivot/Sprite;
-onready var asp = $AudioStreamPlayer2D;
+onready var asp = $AudioStreamPlayer;
 
 var disabled: bool = false;
 

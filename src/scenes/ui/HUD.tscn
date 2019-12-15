@@ -64,6 +64,7 @@ rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 6 )
 
 [node name="KeyHints" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 66.2324
@@ -216,6 +217,7 @@ text = " Cancel Toy
 scroll_active = false
 
 [node name="Trashcan" type="Control" parent="."]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -237,3 +239,6 @@ scale = Vector2( 7, 7 )
 z_index = 500
 z_as_relative = false
 texture = ExtResource( 10 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.5

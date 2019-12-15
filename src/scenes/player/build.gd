@@ -19,7 +19,7 @@ func enter():
 		game.hud.builder.continue_building()
 	else:
 		game.hud.builder.start_building(game.build_speed())
-		game.hud.builder.append_toy()
+		game.hud.builder.append_toy(false)
 		
 func _input(ev):
 	if ev.is_action("cycle") && !ev.is_pressed() && !ev.is_echo() && is_cycling:
@@ -38,10 +38,11 @@ func physics_process(d: float):
 			game.hud.builder.append_toy();
 		
 	if Input.is_action_just_pressed("cancel") && owner.is_building():
+		#audio_utils.play_audio(game.hud.asp, game.sfx["scrap"]);
 		owner.scrap_toy();
 		game.hud.builder.start_building();
-		game.hud.builder.append_toy();
-	
+		game.hud.builder.append_toy(false);
+		
 	var input = (input_utils.get_move_axis());
 
 	if Input.is_action_just_pressed("build") && toy:
@@ -49,7 +50,7 @@ func physics_process(d: float):
 			choose_base_toy(toy);
 		else:
 			choose_prop_toy(toy);
-		# audio_utils.play_audio(owner.asp, select_part);
+		audio_utils.play_audio(owner.asp, game.sfx["select_part"]);
 	elapsed_time += d;
 	
 	if input != Vector2.ZERO && elapsed_time >= DEADZONE_LEAVE_BUILD:
@@ -69,6 +70,7 @@ func choose_prop_toy(toy: HUDToy):
 	game.hud.builder.pop_toy();
 	if (owner.building_complete()):
 		exit_building();
+		audio_utils.play_audio(owner.asp, game.sfx["completed_build"]);
 	elif(!game.use_timer):
 		game.hud.builder.append_toy();
 	
@@ -78,4 +80,4 @@ func choose_base_toy(toy: HUDToy):
 	game.hud.builder.pop_toy();
 	game.hud.builder.base_choosen = true;
 	game.hud.builder.start_building(game.build_speed(), true);
-	game.hud.builder.append_toy()
+	game.hud.builder.append_toy(false)

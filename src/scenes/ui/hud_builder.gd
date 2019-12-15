@@ -57,8 +57,9 @@ func selected_toy() -> Node:
 		return null;
 	return $Holder.get_child(0);
 
-func append_toy():
-	# audio_utils.play_audio(game.root_asp, cycle);
+func append_toy(sound: bool = true):
+	if sound:
+		audio_utils.play_audio(game.hud.asp, game.sfx["cycle"]);
 	if base_choosen == false:
 		add_toy(game.get_rand_base_toy());
 	else: 

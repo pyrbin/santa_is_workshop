@@ -16,6 +16,20 @@ var throw_time = 0;
 var to_scrap = false;
 var throw_height = 300; 
 
+var happy_sfx = [
+	"hoho",
+	"hoho_2",
+	"good_boy"
+]
+
+var voice_chance = 80;
+
+func play_happy_sound():
+	var should_play = randi()%100+1;
+	if (should_play <= voice_chance):
+		var sfx = happy_sfx[randi()%happy_sfx.size()];
+		audio_utils.play_audio($VoiceASP, game.sfx[sfx]);
+
 func _ready():
 	game.player = self;
 
@@ -63,25 +77,37 @@ func scrap_toy(bad: bool = true):
 		throw_object(toy, game.hud.trashcan.global_position, speed, Vector2(1, 1));
 		to_scrap = true;
 		toy = null;
+		Input.set_custom_mouse_cursor(cur_crosshair);
+		set_hovered_kid(null);
 	else: 
 		free_toy();
+	audio_utils.play_audio($AudioStreamPlayer, game.sfx["scrap"]);
 		
 func free_toy():
 	toy.free();
 	toy = null;
 
+func attacked(node):
+	if (thrown_kid == node):
+		thrown_kid = null;
+		scrap_toy(false);
+		throwing = false;
+	if (hovered_kid == node):
+		hovered_kid = null;
+		
 func throw_toy():
 	if (!building_complete() || !hovered_kid || throwing): return;
 	# todo: check if ´mouse hovers valid entity
 	throwing = true;
-	thrown_kid = hovered_kid;
+	thrown_kid = (hovered_kid);
 	var steps = 15;
 	var future_pos =  thrown_kid.global_position + thrown_kid.velocity * thrown_kid.speed * steps;
 	throw_object(toy, future_pos);
-	throw_height = 150; 
+	throw_height = 150;
+	audio_utils.play_audio($AudioStreamPlayer, game.sfx["throwing"]);
+	play_happy_sound();
 	
 func throw_object(targ: Node, to: Vector2, speed: float = THROW_SPEED, scale = Vector2(0.15, 0.15)):
-	
 	var dist = targ.global_position.distance_to(to);
 	var time = (math_utils.ellipse_circumference(dist/2, throw_height)/2)/speed;
 	throw_time = time;
@@ -101,7 +127,6 @@ func _on_Tween_tween_completed(object, key):
 	if (!object == toy): return;
 	if (thrown_kid):
 		if (thrown_kid.toy.is_same(toy)):
-			# todo: Add Point
 			scrap_toy(false);
 			thrown_kid.good_present();
 			game.kid_spawner.kill_kid(thrown_kid);
@@ -109,7 +134,6 @@ func _on_Tween_tween_completed(object, key):
 			hovered_kid = null;
 			game.set_score(game.score + game.ENEMY_SCORE);
 		else:
-			# todo: angry
 			scrap_toy(false);
 			thrown_kid.bad_present();
 			thrown_kid.set_shader_color(0,0,0,0);
@@ -119,6 +143,9 @@ func _on_Tween_tween_completed(object, key):
 		to_scrap = false;
 		toy = null;
 		object.free();
+	if (!thrown_kid && throwing):
+		throwing = false;
+		
 
 func _on_Tween_tween_step(object, key, elapsed, value):
 	var complete = clamp(elapsed / throw_time, 0, 1);

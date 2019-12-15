@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/scrap.wav-93d7c474a1e340102f3ca639efd1ddbe.sample"
+
+[deps]
+
+source_file="res://assets/audio/scrap.wav"
+dest_files=[ "res://.import/scrap.wav-93d7c474a1e340102f3ca639efd1ddbe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/open_bag.wav-189ab4c6dc53a61e3f2f7ce8f690d092.sample"
+
+[deps]
+
+source_file="res://assets/audio/open_bag.wav"
+dest_files=[ "res://.import/open_bag.wav-189ab4c6dc53a61e3f2f7ce8f690d092.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
