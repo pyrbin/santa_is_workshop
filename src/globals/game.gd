@@ -63,17 +63,17 @@ const prop_toys: Array = [
 # Difficulty settings:
 var level_threshold = {
 	40: 2,
-	70: 3,
+	90: 3,
 	150: 4,
-	230: 5,
+	250: 5,
 }
 
 var kid_speed_data = {
 	1: 10,
-	2: 13,
-	3: 15,
-	4: 18,
-	5: 20
+	2: 20,
+	3: 30,
+	4: 40,
+	5: 50
 }
 
 var build_speed_data = {
@@ -86,10 +86,10 @@ var build_speed_data = {
 
 var spawn_speed_data = {
 	1: 20,
-	2: 16,
-	3: 14,
-	4: 12,
-	5: 10
+	2: 18,
+	3: 17,
+	4: 16,
+	5: 15
 }
 
 var camera: Camera2D = null
