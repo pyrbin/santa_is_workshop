@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/gameobject/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/kid/kid.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/bubble.png" type="Texture" id=3]
+[ext_resource path="res://shaders/outline.shader" type="Shader" id=4]
+[ext_resource path="res://assets/objects/kid_run_spritesheet.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20.2022, 31.7593 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 19.6219
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/outLineSize = 0.01
+shader_param/outLineColor = Color( 0, 0, 1, 0 )
+
+[sub_resource type="Animation" id=4]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Pivot/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1.03526 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/Pivot/Sprite:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ), Rect2( 32, 0, 16, 16 ), Rect2( 48, 0, 16, 16 ), Rect2( 64, 0, 16, 16 ), Rect2( 80, 0, 16, 16 ) ]
+}
+
+[node name="Kid" instance=ExtResource( 1 )]
+input_pickable = true
+script = ExtResource( 2 )
+height = 0.0
+speed = 10.0
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( 0, -15 )
+shape = SubResource( 1 )
+
+[node name="Collision" parent="." index="1"]
+position = Vector2( 0.475662, -12.1291 )
+shape = SubResource( 2 )
+
+[node name="ToyWish" type="Position2D" parent="Graphics" index="0"]
+position = Vector2( -37.2824, -84.244 )
+z_index = 4000
+
+[node name="Bubble" type="Sprite" parent="Graphics/ToyWish" index="0"]
+scale = Vector2( 3.3, 3.3 )
+texture = ExtResource( 3 )
+
+[node name="ToyPivot" type="Position2D" parent="Graphics/ToyWish" index="1"]
+position = Vector2( -0.956192, -7.34928 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Shadow" parent="Graphics" index="1"]
+z_axis = NodePath("../../../Kid/ZAxis")
+
+[node name="Sprite" parent="Graphics/Pivot" index="0"]
+material = SubResource( 3 )
+position = Vector2( 0, -18.508 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+flip_h = false
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="ZAxis" parent="." index="3"]
+height_pivot = NodePath("../../Kid/Graphics/Pivot")
+
+[node name="AnimationPlayer" parent="." index="4"]
+anims/run = SubResource( 4 )

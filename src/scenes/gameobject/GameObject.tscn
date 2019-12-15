@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/gameobject/gameobject.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gameobject/z_axis_2d.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 4 )
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/barrel.png-d7558aef31a8f4899a7ffc3a3f2685b7.stex"
+
+[node name="GameObject" type="KinematicBody2D"]
+script = ExtResource( 1 )
+height = 16.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Graphics" type="Position2D" parent="."]
+editor/display_folded = true
+
+[node name="Pivot" type="Position2D" parent="Graphics"]
+
+[node name="Sprite" type="Sprite" parent="Graphics/Pivot"]
+texture = SubResource( 2 )
+flip_h = true
+
+[node name="ZAxis" type="Node" parent="."]
+script = ExtResource( 2 )
+height_pivot = NodePath("../Graphics/Pivot")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

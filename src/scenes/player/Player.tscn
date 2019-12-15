@@ -1,0 +1,196 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/gameobject/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/player/player.gd" type="Script" id=2]
+[ext_resource path="res://assets/objects/santa_bagging_spritesheet-export.png" type="Texture" id=3]
+[ext_resource path="res://assets/objects/santa_idle_spritesheet-export.png" type="Texture" id=4]
+[ext_resource path="res://assets/objects/santa_run_spritesheet-export.png" type="Texture" id=5]
+[ext_resource path="res://scenes/player/idle.gd" type="Script" id=6]
+[ext_resource path="res://scenes/player/move.gd" type="Script" id=7]
+[ext_resource path="res://scenes/player/jump.gd" type="Script" id=8]
+[ext_resource path="res://scenes/player/build.gd" type="Script" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 4 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node
+
+signal z_changed(z)
+
+class_name ZAxis2D
+
+export (NodePath) onready var height_pivot = get_node(height_pivot);
+
+var z = .0 setget _set_z;
+
+func _set_z(value: float):
+	z = value;
+	height_pivot.position.y = -z;
+	emit_signal(\"z_changed\", z);"
+
+[sub_resource type="Animation" id=3]
+resource_name = "bagging"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Pivot/Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ), Rect2( 32, 0, 16, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/Pivot/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.574349 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Pivot/Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ), Rect2( 32, 0, 16, 16 ), Rect2( 48, 0, 16, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/Pivot/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.450625 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+loop = true
+step = 0.13
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Pivot/Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.26, 0.39 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ), Rect2( 32, 0, 16, 16 ), Rect2( 48, 0, 16, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/Pivot/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.517633 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/Pivot/Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ), Rect2( 32, 0, 16, 16 ), Rect2( 48, 0, 16, 16 ), Rect2( 64, 0, 16, 16 ), Rect2( 80, 0, 16, 16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/Pivot/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.732044 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Graphics" parent="." index="1"]
+editor/display_folded = false
+
+[node name="Sprite" parent="Graphics/Pivot" index="0"]
+position = Vector2( -0.129517, -26.3262 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="ToyBuilding" type="Position2D" parent="Graphics" index="2"]
+position = Vector2( 66.2524, -66.0132 )
+scale = Vector2( 1.5, 1.5 )
+z_index = 4001
+z_as_relative = false
+
+[node name="ZAxis" parent="." index="2"]
+script = SubResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/bagging = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/jump = SubResource( 5 )
+anims/move = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="." index="4"]
+
+[node name="FiniteStateMachine" parent="." index="5"]
+DEBUG = false
+
+[node name="Idle" type="Node" parent="FiniteStateMachine" index="0"]
+script = ExtResource( 6 )
+
+[node name="Move" type="Node" parent="FiniteStateMachine" index="1"]
+script = ExtResource( 7 )
+
+[node name="Jump" type="Node" parent="FiniteStateMachine" index="2"]
+script = ExtResource( 8 )
+height = 40.0
+
+[node name="Build" type="Node" parent="FiniteStateMachine" index="3"]
+script = ExtResource( 9 )
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]

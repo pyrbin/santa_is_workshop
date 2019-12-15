@@ -1,0 +1,742 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://states/start_screen.gd" type="Script" id=1]
+[ext_resource path="res://scenes/common/SnowParticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/ui/logo.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/button_text.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/button_text_down.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/pixel_large.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/fonts/pixel_medium.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/ui/hud-search.png" type="Texture" id=8]
+[ext_resource path="res://scenes/ui/HUDToy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/toys/snowman.png" type="Texture" id=10]
+[ext_resource path="res://assets/toys/doll.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/selection.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/hud_bag.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/candy_cane.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/candy_cane_empty.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/bubble.png" type="Texture" id=16]
+[ext_resource path="res://assets/toys/carrot.png" type="Texture" id=17]
+[ext_resource path="res://assets/toys/hat.png" type="Texture" id=18]
+[ext_resource path="res://assets/toys/pickaxe.png" type="Texture" id=19]
+[ext_resource path="res://assets/toys/clock.png" type="Texture" id=20]
+[ext_resource path="res://assets/objects/kid_run_spritesheet.png" type="Texture" id=21]
+[ext_resource path="res://shaders/outline.shader" type="Shader" id=22]
+[ext_resource path="res://assets/ui/present-cursor.png" type="Texture" id=23]
+[ext_resource path="res://assets/ui/keys2x.png" type="Texture" id=24]
+[ext_resource path="res://assets/fonts/pixel_small.tres" type="DynamicFont" id=25]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 0.771073
+margin_right = 0.899585
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 22 )
+shader_param/outLineSize = 0.015
+shader_param/outLineColor = Color( 0.478431, 1, 0, 1 )
+
+[node name="StartScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
+
+[node name="SnowParticles" parent="Control" instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+scale = Vector2( 5, 5 )
+
+[node name="StartMenu" type="Control" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -960.0
+margin_right = 960.0
+margin_bottom = 1080.0
+
+[node name="LogoAnchor" type="Control" parent="StartMenu"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -424.0
+margin_top = 205.486
+margin_right = 424.0
+margin_bottom = 426.486
+
+[node name="logo" type="Sprite" parent="StartMenu/LogoAnchor"]
+position = Vector2( 429.583, 106.001 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 3 )
+
+[node name="MenuItems" type="VBoxContainer" parent="StartMenu"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -87.3466
+margin_right = 128.0
+margin_bottom = 312.653
+custom_constants/separation = 8
+
+[node name="PlayButton" type="TextureButton" parent="StartMenu/MenuItems"]
+editor/display_folded = true
+margin_right = 256.0
+margin_bottom = 64.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartMenu/MenuItems/PlayButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -61.5
+margin_top = -19.0
+margin_right = 61.5
+margin_bottom = 19.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0, 1, 0.243137, 1 )
+custom_constants/shadow_as_outline = 9
+text = "PLAY"
+scroll_active = false
+
+[node name="TutorialButton" type="TextureButton" parent="StartMenu/MenuItems"]
+editor/display_folded = true
+margin_top = 72.0
+margin_right = 256.0
+margin_bottom = 136.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartMenu/MenuItems/TutorialButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.5
+margin_top = -18.5
+margin_right = 78.5
+margin_bottom = 18.5
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0.168627, 0.278431, 0.952941, 1 )
+custom_constants/shadow_as_outline = 9
+text = "GUIDE"
+scroll_active = false
+
+[node name="BackButton" type="TextureButton" parent="StartMenu/MenuItems"]
+editor/display_folded = true
+margin_top = 144.0
+margin_right = 256.0
+margin_bottom = 208.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StartMenu/MenuItems/BackButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.5
+margin_top = -18.5
+margin_right = 58.5
+margin_bottom = 18.5
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 1, 0, 0.0705882, 1 )
+custom_constants/shadow_as_outline = 9
+text = "EXIT"
+scroll_active = false
+
+[node name="Credits" type="VBoxContainer" parent="StartMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -554.0
+margin_top = 199.897
+margin_right = 554.0
+margin_bottom = 435.897
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StartMenu/Credits"]
+margin_right = 1108.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 1, 0.937255, 0, 1 )
+custom_constants/shadow_as_outline = 9
+text = "MADE FOR YOGSCAST 48H GAME JAM 2019"
+scroll_active = false
+
+[node name="CenterContainer" type="CenterContainer" parent="StartMenu/Credits"]
+margin_top = 68.0
+margin_right = 1108.0
+margin_bottom = 132.0
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="StartMenu/Credits/CenterContainer"]
+margin_left = 104.0
+margin_right = 1004.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 900, 64 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0.490196, 0.843137, 1, 1 )
+custom_constants/shadow_as_outline = 9
+text = "Code/Art by Frans & Music by Isak"
+scroll_active = false
+
+[node name="Guide" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -963.436
+margin_top = -0.323517
+margin_right = 956.564
+margin_bottom = 1079.68
+
+[node name="Title" type="RichTextLabel" parent="Guide"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -82.5001
+margin_top = 46.7649
+margin_right = 82.5001
+margin_bottom = 86.7655
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0, 0.25098, 1, 1 )
+text = "GUIDE"
+scroll_active = false
+
+[node name="BackButton2" type="TextureButton" parent="Guide"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 361.362
+margin_top = 40.0842
+margin_right = 617.362
+margin_bottom = 104.084
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/BackButton2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.5
+margin_top = -18.5
+margin_right = 58.5
+margin_bottom = 18.5
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0.596078, 0.74902, 0.933333, 1 )
+custom_constants/shadow_as_outline = 9
+text = "Back
+"
+scroll_active = false
+
+[node name="Content" type="RichTextLabel" parent="Guide"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -371.681
+margin_top = 144.607
+margin_right = 358.319
+margin_bottom = 356.607
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "Angry children will spawn
+requesting a certain toy
+with certain properties"
+scroll_active = false
+
+[node name="Content2" type="RichTextLabel" parent="Guide"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -375.691
+margin_top = 307.575
+margin_right = 330.309
+margin_bottom = 609.575
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 0.894118, 0.894118, 0.894118, 1 )
+text = "Open your bag and find
+the toy base and parts.
+"
+scroll_active = false
+
+[node name="Content3" type="RichTextLabel" parent="Guide"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -382.032
+margin_top = 516.088
+margin_right = 323.968
+margin_bottom = 673.088
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 0.839216, 1, 0.992157, 1 )
+text = "When the toy is constructed click on the child you want to give it to."
+scroll_active = false
+
+[node name="Content4" type="RichTextLabel" parent="Guide"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -383.702
+margin_top = 633.316
+margin_right = 322.298
+margin_bottom = 790.316
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 0.105882, 0.984314, 0.941176, 1 )
+text = "If a child catches you, you'll lose one health."
+scroll_active = false
+
+[node name="Builder" type="Panel" parent="Guide"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -296.549
+margin_top = -115.32
+margin_right = 111.451
+margin_bottom = -47.3202
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_stretch_ratio = 0.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Holder" type="HBoxContainer" parent="Guide/Builder"]
+editor/display_folded = true
+margin_left = 0.357056
+margin_top = -0.598755
+margin_right = 408.357
+margin_bottom = 67.4012
+grow_horizontal = 0
+rect_clip_content = true
+alignment = 2
+
+[node name="TextureRect" parent="Guide/Builder/Holder" instance=ExtResource( 9 )]
+margin_left = 207.0
+margin_right = 271.0
+margin_bottom = 67.0
+
+[node name="TextureRect2" parent="Guide/Builder/Holder" instance=ExtResource( 9 )]
+margin_left = 275.0
+margin_right = 339.0
+margin_bottom = 67.0
+texture = ExtResource( 10 )
+
+[node name="TextureRect3" parent="Guide/Builder/Holder" instance=ExtResource( 9 )]
+margin_left = 343.0
+margin_right = 407.0
+margin_bottom = 67.0
+texture = ExtResource( 11 )
+
+[node name="SelectRect" type="TextureRect" parent="Guide/Builder"]
+margin_left = -1.0144
+margin_top = -34.8118
+margin_right = 38.9856
+margin_bottom = 18.1882
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+
+[node name="hud_bag" type="TextureRect" parent="Guide/Builder"]
+show_behind_parent = true
+margin_left = 355.238
+margin_top = -45.2255
+margin_right = 387.238
+margin_bottom = -29.2255
+rect_scale = Vector2( 9.56001, 9.56001 )
+texture = ExtResource( 13 )
+
+[node name="candy_cane" type="Sprite" parent="Guide"]
+position = Vector2( 871.623, 724.346 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 14 )
+
+[node name="candy_cane_empty" type="Sprite" parent="Guide"]
+position = Vector2( 932.693, 724.346 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 15 )
+
+[node name="Control" type="Control" parent="Guide"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 92.6597
+margin_top = -171.956
+margin_right = 132.66
+margin_bottom = -131.955
+
+[node name="bubble" type="Sprite" parent="Guide/Control"]
+editor/display_folded = true
+position = Vector2( 61.3938, -66.101 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 16 )
+
+[node name="snowman" type="Sprite" parent="Guide/Control/bubble"]
+editor/display_folded = true
+position = Vector2( 0, -2.88087 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 10 )
+
+[node name="carrot" type="Sprite" parent="Guide/Control/bubble/snowman"]
+position = Vector2( -1.06061, 10.0083 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 17 )
+
+[node name="hat" type="Sprite" parent="Guide/Control/bubble/snowman"]
+position = Vector2( 0.0769958, -14.0708 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 18 )
+
+[node name="pickaxe" type="Sprite" parent="Guide/Control/bubble/snowman"]
+position = Vector2( -6.17981, -3.83246 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 19 )
+
+[node name="clock" type="Sprite" parent="Guide/Control/bubble/snowman"]
+position = Vector2( 5.57538, -2.50526 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 20 )
+
+[node name="kid_run_spritesheet" type="Sprite" parent="Guide/Control"]
+position = Vector2( 134.524, 26.9734 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 21 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="Control2" type="Control" parent="Guide"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 200.727
+margin_top = 7.50226
+margin_right = 240.727
+margin_bottom = 47.5023
+
+[node name="kid_run_spritesheet" type="Sprite" parent="Guide/Control2"]
+material = SubResource( 2 )
+position = Vector2( 134.524, 26.9734 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 21 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="crosshair149" type="Sprite" parent="Guide/Control2/kid_run_spritesheet"]
+position = Vector2( -3.5914, -3.83139 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 23 )
+
+[node name="KeyHint" type="Control" parent="Guide"]
+editor/display_folded = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 158.428
+margin_top = -380.448
+margin_right = 624.428
+margin_bottom = -267.447
+
+[node name="Movement" type="Control" parent="Guide/KeyHint"]
+editor/display_folded = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 114.444
+margin_top = 87.5832
+margin_right = 334.444
+margin_bottom = 238.583
+
+[node name="candy_cane" type="Sprite" parent="Guide/KeyHint/Movement"]
+position = Vector2( 109.753, 40.8961 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 64, 32, 16, 16 )
+
+[node name="candy_cane2" type="Sprite" parent="Guide/KeyHint/Movement"]
+position = Vector2( 73.3491, 74.2469 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 48, 48, 16, 16 )
+
+[node name="candy_cane3" type="Sprite" parent="Guide/KeyHint/Movement"]
+position = Vector2( 109.753, 74.3647 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 64, 48, 16, 16 )
+
+[node name="candy_cane4" type="Sprite" parent="Guide/KeyHint/Movement"]
+position = Vector2( 146.172, 74.574 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 80, 48, 16, 16 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/KeyHint"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -290.406
+margin_top = 69.5742
+margin_right = -113.406
+margin_bottom = 99.5742
+custom_fonts/normal_font = ExtResource( 25 )
+custom_colors/default_color = Color( 0.92549, 1, 0.168627, 1 )
+text = "Movement"
+scroll_active = false
+
+[node name="KeyHint2" type="Control" parent="Guide"]
+editor/display_folded = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 158.428
+margin_top = -290.224
+margin_right = 624.428
+margin_bottom = -177.223
+
+[node name="Movement" type="Control" parent="Guide/KeyHint2"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -66.4535
+margin_right = 220.0
+margin_bottom = 84.5465
+
+[node name="candy_cane3" type="Sprite" parent="Guide/KeyHint2/Movement"]
+position = Vector2( 109.753, 189.871 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 80, 32, 16, 16 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/KeyHint2"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -328.813
+margin_top = 115.83
+margin_right = 56.1872
+margin_bottom = 146.83
+custom_fonts/normal_font = ExtResource( 25 )
+custom_colors/default_color = Color( 0.92549, 1, 0.168627, 1 )
+text = "Open bag/Select part"
+scroll_active = false
+
+[node name="KeyHint3" type="Control" parent="Guide"]
+editor/display_folded = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 158.428
+margin_top = -121.022
+margin_right = 624.428
+margin_bottom = -8.02136
+
+[node name="Movement" type="Control" parent="Guide/KeyHint3"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -66.4535
+margin_right = 220.0
+margin_bottom = 84.5465
+
+[node name="candy_cane3" type="Sprite" parent="Guide/KeyHint3/Movement"]
+position = Vector2( 109.753, 63.5348 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 48, 32, 16, 16 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/KeyHint3"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -326.009
+margin_top = -7.03046
+margin_right = 34.9903
+margin_bottom = 26.9695
+custom_fonts/normal_font = ExtResource( 25 )
+custom_colors/default_color = Color( 0.92549, 1, 0.168627, 1 )
+text = "Cycle/search in bag"
+scroll_active = false
+
+[node name="KeyHint4" type="Control" parent="Guide"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 158.428
+margin_top = -75.5954
+margin_right = 624.428
+margin_bottom = 37.405
+
+[node name="Movement" type="Control" parent="Guide/KeyHint4"]
+editor/display_folded = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -66.4535
+margin_right = 220.0
+margin_bottom = 84.5465
+
+[node name="candy_cane3" type="Sprite" parent="Guide/KeyHint4/Movement"]
+position = Vector2( 109.753, 62.6323 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 80, 64, 16, 16 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/KeyHint4"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -327.436
+margin_top = -8.93552
+margin_right = -155.436
+margin_bottom = 25.0645
+custom_fonts/normal_font = ExtResource( 25 )
+custom_colors/default_color = Color( 0.92549, 1, 0.168627, 1 )
+text = "Scrap toy"
+scroll_active = false
+
+[node name="KeyHint5" type="Control" parent="Guide"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 158.428
+margin_top = -28.1397
+margin_right = 624.428
+margin_bottom = 84.8603
+
+[node name="Movement" type="Control" parent="Guide/KeyHint5"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -66.4535
+margin_right = 220.0
+margin_bottom = 84.5465
+
+[node name="candy_cane3" type="Sprite" parent="Guide/KeyHint5/Movement"]
+position = Vector2( 109.753, 62.6323 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 32, 16, 16, 16 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/KeyHint5"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -327.039
+margin_top = -5.78186
+margin_right = -138.04
+margin_bottom = 28.2181
+custom_fonts/normal_font = ExtResource( 25 )
+custom_colors/default_color = Color( 0.92549, 1, 0.168627, 1 )
+text = "Throw toy"
+scroll_active = false
+
+[node name="EndScreen" type="Control" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -963.436
+margin_top = -0.323517
+margin_right = 956.564
+margin_bottom = 1079.68
+
+[node name="Title" type="RichTextLabel" parent="EndScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -221.402
+margin_right = 150.0
+margin_bottom = -181.402
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 1, 0, 0.270588, 1 )
+text = "GAME OVER"
+scroll_active = false
+
+[node name="BackButton2" type="TextureButton" parent="EndScreen"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -11.86
+margin_right = 128.0
+margin_bottom = 52.14
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EndScreen/BackButton2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.5
+margin_top = -18.5
+margin_right = 58.5
+margin_bottom = 18.5
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0.596078, 0.74902, 0.933333, 1 )
+custom_constants/shadow_as_outline = 9
+text = "Back
+"
+scroll_active = false
+
+[node name="Content" type="RichTextLabel" parent="EndScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -199.218
+margin_top = -122.701
+margin_right = -7.21826
+margin_bottom = -78.7008
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "SCORE:"
+scroll_active = false
+
+[node name="Score" type="RichTextLabel" parent="EndScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 7.21838
+margin_top = -122.701
+margin_right = 199.218
+margin_bottom = -78.7008
+custom_fonts/normal_font = ExtResource( 6 )
+custom_colors/default_color = Color( 0.945098, 1, 0, 1 )
+text = "0
+"
+scroll_active = false
+[connection signal="pressed" from="StartMenu/MenuItems/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="StartMenu/MenuItems/TutorialButton" to="." method="_on_TutorialButton_pressed"]
+[connection signal="pressed" from="StartMenu/MenuItems/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Guide/BackButton2" to="." method="_on_BackButton2_pressed"]
+[connection signal="visibility_changed" from="EndScreen" to="." method="_on_EndScreen_visibility_changed"]
+[connection signal="pressed" from="EndScreen/BackButton2" to="." method="_on_BackButton2_pressed"]

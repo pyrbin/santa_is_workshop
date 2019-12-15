@@ -1,0 +1,239 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/ui/HUD.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/Builder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/pixel_large.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/ui/ScoreLabel.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/HP.gd" type="Script" id=5]
+[ext_resource path="res://assets/ui/candy_cane.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/candy_cane_empty.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/keys.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/trashcan_back.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/trashcan_front.png" type="Texture" id=10]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 109.247
+margin_top = 32.4229
+margin_right = 109.247
+margin_bottom = 32.4229
+script = ExtResource( 1 )
+
+[node name="Builder" parent="." instance=ExtResource( 2 )]
+
+[node name="Score" type="Label" parent="."]
+margin_left = 117.895
+margin_top = 43.158
+margin_right = 201.895
+margin_bottom = 85.158
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.890196, 0, 1 )
+text = "9999"
+script = ExtResource( 4 )
+
+[node name="HP" type="HBoxContainer" parent="."]
+editor/display_folded = true
+margin_left = 106.469
+margin_top = 97.2032
+margin_right = 162.469
+margin_bottom = 113.203
+rect_min_size = Vector2( 48, 16 )
+rect_scale = Vector2( 4, 4 )
+custom_constants/separation = -3
+script = ExtResource( 5 )
+
+[node name="candy_cane1" type="TextureRect" parent="HP"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 6 )
+
+[node name="candy_cane2" type="TextureRect" parent="HP"]
+margin_left = 13.0
+margin_right = 29.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 7 )
+
+[node name="candy_cane3" type="TextureRect" parent="HP"]
+margin_left = 26.0
+margin_right = 42.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 6 )
+
+[node name="KeyHints" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 66.2324
+margin_top = -335.765
+margin_right = 466.232
+margin_bottom = -83.7645
+rect_min_size = Vector2( 400, 240 )
+
+[node name="Keyhelp4" type="Control" parent="KeyHints"]
+editor/display_folded = true
+margin_right = 400.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="Sprite" type="Sprite" parent="KeyHints/Keyhelp4"]
+position = Vector2( 27.3684, 26.3158 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 48, 32, 16, 16 )
+
+[node name="Panel" type="Panel" parent="KeyHints/Keyhelp4"]
+margin_left = 63.0
+margin_top = 9.0
+margin_right = 227.0
+margin_bottom = 49.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="KeyHints/Keyhelp4/Panel"]
+margin_left = 11.0
+margin_top = 14.0
+margin_right = 211.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 200, 40 )
+custom_colors/default_color = Color( 1, 0.960784, 0, 1 )
+bbcode_enabled = true
+bbcode_text = " [b]Cycle Parts in Bag [/b]
+
+"
+text = " Cycle Parts in Bag 
+
+"
+scroll_active = false
+
+[node name="Keyhelp" type="Control" parent="KeyHints"]
+editor/display_folded = true
+margin_top = 64.0
+margin_right = 400.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 100, 60 )
+
+[node name="Sprite" type="Sprite" parent="KeyHints/Keyhelp"]
+position = Vector2( 27.3684, 26.3158 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 80, 32, 16, 16 )
+
+[node name="Panel" type="Panel" parent="KeyHints/Keyhelp"]
+margin_left = 63.0
+margin_top = 9.0
+margin_right = 227.0
+margin_bottom = 49.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="KeyHints/Keyhelp/Panel"]
+margin_left = 11.0
+margin_top = 14.0
+margin_right = 211.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 200, 40 )
+custom_colors/default_color = Color( 1, 0.960784, 0, 1 )
+bbcode_enabled = true
+bbcode_text = " [b]Open bag / Select Part [/b]
+
+"
+text = " Open bag / Select Part 
+
+"
+scroll_active = false
+
+[node name="Keyhelp2" type="Control" parent="KeyHints"]
+editor/display_folded = true
+margin_top = 128.0
+margin_right = 400.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="Sprite" type="Sprite" parent="KeyHints/Keyhelp2"]
+position = Vector2( 27.3684, 26.3158 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 32, 16, 16, 16 )
+
+[node name="Panel" type="Panel" parent="KeyHints/Keyhelp2"]
+margin_left = 63.0
+margin_top = 9.0
+margin_right = 227.0
+margin_bottom = 49.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="KeyHints/Keyhelp2/Panel"]
+margin_left = 8.67859
+margin_top = 14.7737
+margin_right = 208.679
+margin_bottom = 54.7737
+rect_min_size = Vector2( 200, 40 )
+custom_colors/default_color = Color( 1, 0.960784, 0, 1 )
+bbcode_enabled = true
+bbcode_text = " [b]Throw Toy  [/b]
+
+"
+text = " Throw Toy  
+
+"
+scroll_active = false
+
+[node name="Keyhelp3" type="Control" parent="KeyHints"]
+editor/display_folded = true
+margin_top = 192.0
+margin_right = 400.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="Sprite" type="Sprite" parent="KeyHints/Keyhelp3"]
+position = Vector2( 27.3684, 26.3158 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 80, 64, 16, 16 )
+
+[node name="Panel" type="Panel" parent="KeyHints/Keyhelp3"]
+margin_left = 63.0
+margin_top = 9.0
+margin_right = 227.0
+margin_bottom = 49.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="KeyHints/Keyhelp3/Panel"]
+margin_left = 8.67859
+margin_top = 14.7737
+margin_right = 208.679
+margin_bottom = 54.7737
+rect_min_size = Vector2( 200, 40 )
+custom_colors/default_color = Color( 1, 0.960784, 0, 1 )
+bbcode_enabled = true
+bbcode_text = " [b]Cancel Toy [/b]
+
+"
+text = " Cancel Toy 
+
+"
+scroll_active = false
+
+[node name="Trashcan" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -69.1497
+margin_top = -246.702
+margin_right = -29.1497
+margin_bottom = -206.702
+
+[node name="Back" type="Sprite" parent="Trashcan"]
+position = Vector2( 0, 7.16968 )
+scale = Vector2( 7, 7 )
+z_index = 400
+z_as_relative = false
+texture = ExtResource( 9 )
+
+[node name="Front" type="Sprite" parent="Trashcan"]
+scale = Vector2( 7, 7 )
+z_index = 500
+z_as_relative = false
+texture = ExtResource( 10 )

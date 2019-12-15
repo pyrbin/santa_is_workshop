@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/gameobject/GameObject.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/gameobject/entity.gd" type="Script" id=2]
+[ext_resource path="res://scenes/common/Shadow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/fsm/fsm.gd" type="Script" id=4]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/barrel.png-d7558aef31a8f4899a7ffc3a3f2685b7.stex"
+
+[node name="Entity" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Shadow" parent="Graphics" index="0" instance=ExtResource( 3 )]
+z_axis = NodePath("../../ZAxis")
+
+[node name="Sprite" parent="Graphics/Pivot" index="0"]
+texture = SubResource( 1 )
+
+[node name="FiniteStateMachine" type="Node" parent="." index="4"]
+script = ExtResource( 4 )
