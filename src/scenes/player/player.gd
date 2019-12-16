@@ -100,7 +100,7 @@ func throw_toy():
 	# todo: check if ´mouse hovers valid entity
 	throwing = true;
 	thrown_kid = (hovered_kid);
-	var steps = 15;
+	var steps = 3;
 	var future_pos =  thrown_kid.global_position + thrown_kid.velocity * thrown_kid.speed * steps;
 	throw_object(toy, future_pos);
 	throw_height = 150;

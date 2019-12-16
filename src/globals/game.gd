@@ -70,10 +70,10 @@ var level_threshold = {
 
 var kid_speed_data = {
 	1: 10,
-	2: 20,
-	3: 30,
-	4: 40,
-	5: 50
+	2: 15,
+	3: 25,
+	4: 30,
+	5: 35
 }
 
 var build_speed_data = {
